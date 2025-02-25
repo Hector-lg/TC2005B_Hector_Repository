@@ -1,0 +1,14 @@
+h1, h2, h3{
+    font-family: Arial, sans-serif;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#descripcion{
+    color: #fa522e;
+    background-color: #130808;
+}

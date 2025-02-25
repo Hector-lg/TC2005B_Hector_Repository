@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pong</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #000;
+            font-family: 'Arial', sans-serif;
+        }
+        canvas {
+            border: 2px solid #fff;
+        }
+        .score {
+            position: absolute;
+            color: white;
+            font-size: 32px;
+            font-family: monospace;
+            top: 20px;
+        }
+        #player1Score {
+            left: calc(50% - 200px);
+        }
+        #player2Score {
+            right: calc(50% - 200px);
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            color: white;
+            font-family: monospace;
+            text-align: center;
+            width: 100%;
+        }
+        .game-container {
+            position: relative;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div id="player1Score" class="score">0</div>
+        <div id="player2Score" class="score">0</div>
+        <canvas id="pongCanvas"></canvas>
+        <div id="controls">
+            Jugador 1: W/S | Jugador 2: ↑/↓<br>
+            Espacio para comenzar
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('pongCanvas');
+        const ctx = canvas.getContext('2d');
+        const p1ScoreElement = document.getElementById('player1Score');
+        const p2ScoreElement = document.getElementById('player2Score');
+
+        // Canvas más pequeño
+        canvas.width = 600;
+        canvas.height = 400;
+
+        window.addEventListener('keydown', function(e) {
+            if([32, 37, 38, 39, 40, 87, 83].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+
+        let keys = {};
+        document.addEventListener('keydown', e => keys[e.key] = true);
+        document.addEventListener('keyup', e => keys[e.key] = false);
+
+        const paddleHeight = 80;
+        const paddleWidth = 10;
+        const ballSize = 8;
+        const paddleSpeed = 8;
+        const initialBallSpeed = 5;
+
+        let gameStarted = false;
+
+        const game = {
+            player1: {
+                x: 20, // Más cerca del borde izquierdo
+                y: canvas.height/2 - paddleHeight/2,
+                score: 0
+            },
+            player2: {
+                x: canvas.width - 30, // Más cerca del borde derecho
+                y: canvas.height/2 - paddleHeight/2,
+                score: 0
+            },
+            ball: {
+                x: canvas.width/2,
+                y: canvas.height/2,
+                speedX: initialBallSpeed,
+                speedY: 0
+            }
+        };
+
+        function resetBall() {
+            game.ball.x = canvas.width/2;
+            game.ball.y = canvas.height/2;
+            game.ball.speedX = (Math.random() > 0.5 ? 1 : -1) * initialBallSpeed;
+            game.ball.speedY = (Math.random() * 2 - 1) * initialBallSpeed;
+        }
+
+        function updatePaddles() {
+            // Jugador 1 (W/S)
+            if (keys['w'] && game.player1.y > 0) {
+                game.player1.y -= paddleSpeed;
+            }
+            if (keys['s'] && game.player1.y < canvas.height - paddleHeight) {
+                game.player1.y += paddleSpeed;
+            }
+
+            // Jugador 2 (Flechas)
+            if (keys['ArrowUp'] && game.player2.y > 0) {
+                game.player2.y -= paddleSpeed;
+            }
+            if (keys['ArrowDown'] && game.player2.y < canvas.height - paddleHeight) {
+                game.player2.y += paddleSpeed;
+            }
+
+            // Iniciar juego
+            if (keys[' '] && !gameStarted) {
+                gameStarted = true;
+                resetBall();
+            }
+        }
+
+        function updateBall() {
+            if (!gameStarted) return;
+
+            game.ball.x += game.ball.speedX;
+            game.ball.y += game.ball.speedY;
+
+            // Colisión con bordes superior e inferior
+            if (game.ball.y <= 0 || game.ball.y >= canvas.height - ballSize) {
+                game.ball.speedY = -game.ball.speedY;
+            }
+
+            // Colisión con raqueta del jugador 1
+            if (game.ball.x <= game.player1.x + paddleWidth &&
+                game.ball.x >= game.player1.x &&
+                game.ball.y >= game.player1.y &&
+                game.ball.y <= game.player1.y + paddleHeight) {
+                game.ball.speedX = Math.abs(game.ball.speedX);
+                let relativeIntersectY = (game.player1.y + (paddleHeight/2)) - game.ball.y;
+                game.ball.speedY = -(relativeIntersectY * 0.1);
+            }
+
+            // Colisión con raqueta del jugador 2
+            if (game.ball.x + ballSize >= game.player2.x &&
+                game.ball.x <= game.player2.x + paddleWidth &&
+                game.ball.y >= game.player2.y &&
+                game.ball.y <= game.player2.y + paddleHeight) {
+                game.ball.speedX = -Math.abs(game.ball.speedX);
+                let relativeIntersectY = (game.player2.y + (paddleHeight/2)) - game.ball.y;
+                game.ball.speedY = -(relativeIntersectY * 0.1);
+            }
+
+            // Puntuación
+            if (game.ball.x <= 0) {
+                game.player2.score++;
+                p2ScoreElement.textContent = game.player2.score;
+                gameStarted = false;
+                resetBall();
+            }
+            if (game.ball.x >= canvas.width) {
+                game.player1.score++;
+                p1ScoreElement.textContent = game.player1.score;
+                gameStarted = false;
+                resetBall();
+            }
+        }
+
+        function draw() {
+            // Limpiar canvas
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Línea central
+            ctx.strokeStyle = '#fff';
+            ctx.setLineDash([5, 15]);
+            ctx.beginPath();
+            ctx.moveTo(canvas.width/2, 0);
+            ctx.lineTo(canvas.width/2, canvas.height);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Dibujar raquetas
+            ctx.fillStyle = '#fff';
+            // Jugador 1
+            ctx.fillRect(game.player1.x, game.player1.y, paddleWidth, paddleHeight);
+            // Jugador 2
+            ctx.fillRect(game.player2.x, game.player2.y, paddleWidth, paddleHeight);
+
+            // Dibujar pelota
+            ctx.fillRect(game.ball.x, game.ball.y, ballSize, ballSize);
+
+            // Mensaje inicial
+            if (!gameStarted) {
+                ctx.fillStyle = '#fff';
+                ctx.font = '20px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Presiona ESPACIO para comenzar', canvas.width/2, canvas.height/2);
+            }
+        }
+
+        function gameLoop() {
+            updatePaddles();
+            updateBall();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
+</body>
+</html>

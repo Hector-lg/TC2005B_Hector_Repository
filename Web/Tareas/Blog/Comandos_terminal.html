@@ -9,20 +9,22 @@
     
     <h1> Comandos de Terminal </h1>
 
+    <p> <a href="blog.html">← Volver al Blog</a></p>
+
     <h4>
         Configure Tooling
     </h4>
         <p>Configure user information for all local repositories.</p>
-    <div id = "tabla_configuar_git">
+    <div id = "tabla_configurar_git">
         <table>
             <tr>
-                <th>$ git config --global user.name "[name]"</th>
+                <th><code>$ git config --global user.name "[name]"</code></th>
             </tr>
             <tr>
-                <td>Sets the name you want attached to your commit transactions</td>
+                <td><code>Sets the name you want attached to your commit transactions</td>
             </tr>
             <tr>
-                <th>$ git config --global user.email "[email address]</th>
+                <th><code>$ git config --global user.email "[email address]</code></th>
             </tr>
             <tr>
                 <td>Sets the email you want attached to your commit transactions</td>
@@ -30,18 +32,36 @@
         </table>
     </div>
         <br/>
+    
+    <h4> Comandos del Sistema de archivos</h4>
     <ul>
         <li><strong>pwd</strong>: muestra el directorio donde esta trabajando</li>
         <li><strong>ls</strong>: lista de los documentos y folders dentro del </li>
-        <li><strong>cd "directorio"</strong>: change direcotry y el nombre a donde te quieres mover</li>
+        <li><strong>cd "directorio"</strong>: change directory y el nombre a donde te quieres mover</li>
             <ul>
                 <li><strong>cd ..</strong> se mueve al direcotrio de arriba de donde esta dentro</li>
                 <li><strong>cd ~</strong> para moverse al directorio main</li>
             </ul>
         <li><strong>mkdir "nombre_directorio"</strong>: make direcotry con el nombre dado</li>
         <li><strong>mkdir "nombre_directorio"</strong>: make direcotry con el nombre dado</li>
-        <li><stron>touch "file"</stron>: creates a new empty file with the given name</li>
+        <li><strong>touch "file"</strong>: creates a new empty file with the given name</li>
         
+    </ul>
+    </br>
+
+    <h4> Comandos Git</h4>
+    <ul>
+        <li><strong>git clone "URL"</strong>: clona un repositorio remoto en tu máquina</li>
+        <li><strong>git status</strong>: muestra el estado actual del repositorio (archivos modificados, en staging, etc.)</li>
+        <li><strong>git add "archivo"</strong>: añade un archivo al área de staging</li>
+        <li><strong>git commit -m "mensaje"</strong>: guarda los cambios en el historial de versiones</li>
+        <li><strong>git branch</strong>: muestra todas las ramas del repositorio</li>
+        <li><strong>git branch "nombre_rama"</strong>: crea una nueva rama</li>
+        <li><strong>git checkout "nombre_rama"</strong>: cambia a la rama especificada</li>
+        <li><strong>git checkout -b "nombre_rama"</strong>: crea y cambia a una nueva rama</li>
+        <li><strong>git merge "nombre_rama"</strong>: fusiona la rama especificada con la actual</li>
+        <li><strong>git pull</strong>: obtiene y fusiona los cambios del repositorio remoto</li>
+        <li><strong>git push</strong>: envía los commits al repositorio remoto</li>
     </ul>
 
 

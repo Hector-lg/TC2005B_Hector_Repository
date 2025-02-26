@@ -6,44 +6,69 @@
     <title>flujo github</title>
 </head>
 <body>
-    <h1> Git CheatSheet </h1>
-    <br/>
-    <h2> Flujo de trabajo Git</h2>
-    <img src = "https://github.com/gilecheverria/github_fundamentals/raw/main/Activities/.images/4_clone/4_clone_4.jpg" width = "75%"/>
+    <header><h1> Git </h1></header>
+
+    <p> <a href="blog.html">← Volver al Blog</a></p>
+
+    <main>
+        <br/>
+        <h2> Flujo de trabajo Git</h2>
+        <img src = "https://github.com/gilecheverria/github_fundamentals/raw/main/Activities/.images/4_clone/4_clone_4.jpg" width = "75%"/>
     
-    <h1>Flujo de Trabajo para Hacer un Push en Git</h1>
+        <h2> Comandos escenciales</h2>
+
+        <table border="1">
+            <tr>
+                <th>Comando</th>
+                <th>Descripción</th>
+            </tr>
+            <tr>
+                <td><code>git clone URL</code></td>
+                <td>Clona un repositorio remoto</td>
+            </tr>
+            <tr>
+                <td><code>git add .</code></td>
+                <td>Agrega todos los cambios al área de preparación</td>
+            </tr>
+            <tr>
+                <td><code>git commit -m "mensaje"</code></td>
+                <td>Guarda los cambios en el historial</td>
+            </tr>
+        </table>
     
-    <h2>1. Clonar el Repositorio</h2>
-    <p>Si aún no tienes el repositorio en tu computadora, usa el siguiente comando:</p>
-    <pre><code>git clone https://github.com/usuario/repositorio.git</code></pre>
-    <p>Esto descargará el código en una carpeta local.</p>
+
+        <h1>Flujo de Trabajo </h1>
     
-    <h2>2. Navegar al Repositorio</h2>
-    <p>Accede a la carpeta del repositorio clonado:</p>
-    <pre><code>cd repositorio</code></pre>
+        <h2>1. Clonar el Repositorio</h2>
+        <p>Si aún no tienes el repositorio en tu computadora, usa el siguiente comando:</p>
+        <p><code>git clone https://github.com/usuario/repositorio.git</code></p>
+        <p>Esto descargará el código en una carpeta local.</p>
     
-    <h2>3. Crear o Editar Archivos</h2>
-    <p>Modifica los archivos o agrega nuevos archivos a tu proyecto.</p>
+        <h2>2. Navegar al Repositorio</h2>
+        <p>Accede a la carpeta del repositorio clonado:</p>
+        <p><code>cd repositorio</code></p>
     
-    <h2>4. Agregar los Cambios al Área de Preparación</h2>
-    <p>Para agregar un archivo específico:</p>
-    <pre><code>git add archivo.html</code></pre>
-    <p>Para agregar todos los cambios:</p>
-    <pre><code>git add .</code></pre>
+        <h2>3. Crear o Editar Archivos</h2>
+        <p>Modifica los archivos o agrega nuevos archivos a tu proyecto.</p>
     
-    <h2>5. Confirmar los Cambios (Commit)</h2>
-    <p>Registra los cambios en el historial de Git con un mensaje:</p>
-    <pre><code>git commit -m "Descripción de los cambios"</code></pre>
+        <h2>4. Agregar los Cambios al Área de Preparación</h2>
+        <p>Para agregar un archivo específico:</p>
+        <p><code>git add archivo.html</code></p>
+        <p>Para agregar todos los cambios:</p>
+        <p><code>git add .</code></p>
     
-    <h2>6. Enviar los Cambios al Repositorio Remoto</h2>
-    <p>Sube los cambios al repositorio remoto en la rama principal (usualmente <code>main</code> o <code>master</code>):</p>
-    <pre><code>git push origin main</code></pre>
+        <h2>5. Confirmar los Cambios (Commit)</h2>
+        <p>Registra los cambios en el historial de Git con un mensaje:</p>
+        <p><code>git commit -m "Descripción de los cambios"</code></p>
     
-    <h2>7. Verificar los Cambios</h2>
-    <p>Visita el repositorio en GitHub para confirmar que los cambios han sido aplicados.</p>
+        <h2>6. Enviar los Cambios al Repositorio Remoto</h2>
+        <p>Sube los cambios al repositorio remoto en la rama principal (usualmente <code>main</code> o <code>master</code>):</p>
+        <p><code>git push origin main</code></p>
     
-    <h2>8. Desplegar la Página Web</h2>
-    <p>Si usas GitHub Pages, ve a la configuración del repositorio y habilita GitHub Pages en la rama correcta.</p>
+        <h2>7. Verificar los Cambios</h2>
+        <p>Visita el repositorio en GitHub para confirmar que los cambios han sido aplicados.</p>
+    
+    </main>
     
 </body>
 </html>

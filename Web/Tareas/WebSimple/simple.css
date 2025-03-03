@@ -1,0 +1,89 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body{
+    margin: 0px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background-color: rgb(28, 42, 48);
+
+
+}
+
+h3{
+    color:white;
+}
+header nav{
+    color:white;
+    margin:  18.72px;
+    padding: 0px 50px;
+    
+}
+
+#SectionCourse{
+    display: flex;
+    background-color: rgb(223, 156, 56);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px;
+    
+}
+#SectionCourse h2{
+    /* display: flex; */
+    color:white;
+}
+#SectionCourse p{
+    /* display: flex; */
+    color:white;
+    text-align: center;
+}
+
+
+#SuscribeSection{
+    background-color: rgb(28, 42, 48);
+    display: flex;
+    justify-content: center;
+
+}
+
+#SuscribeSection h4{
+    color:white;
+}
+
+#SuscribeSection form{
+    margin: 16px;
+}
+
+#imageSection{
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+}
+#SuscribeSection  form button{
+    background-color: orange;
+    color: white;
+}
+
+#imageSection {
+    display: flex;
+    justify-content: space-between;
+}
+#imageSection div{
+    padding: 50px;
+}
+
+#imageSection div p{
+    text-align: center;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(28, 42, 48);
+    color: white;
+    padding: auto;
+}

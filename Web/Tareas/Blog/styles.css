@@ -68,7 +68,7 @@ h1{
 
 
 #descripccion {
-    background-image: url(https://files.oaiusercontent.com/file-AdDQGWKAuUtFxY9E9adoJL?se=2025-03-05T14%3A57%3A01Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Da4846b8e-8eab-4cb4-979c-8d2e238acb1a.webp&sig=ciaOpOrsK4aRi0qSt6%2B52o7bhCxnhmFlC2//bEurUso%3D);
+    background-image: url(https://trinity.duke.edu/sites/trinity.duke.edu/files/styles/low_landscape_100_width/public/images/Computer%20Science%2050th%20Anniversary-v1.jpg?h=e995465f&itok=lup0JhNf);
     flex-grow:1;
     background-color: #130808;
     color: #fa522e;
@@ -83,7 +83,7 @@ h1{
 
 #descripccion h2{
     margin-bottom: 15px;
-    color: white;
+    color: black;
 }
 
 #descripccion p{

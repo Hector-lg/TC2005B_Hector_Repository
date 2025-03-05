@@ -1,0 +1,85 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceptos Básicos de CSS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Introducción a CSS</h1>
+    
+    <p><a href="blog.html">← Volver al Blog</a></p>
+
+    <h2>¿Qué es CSS?</h2>
+    <p>CSS (Cascading Style Sheets) es un lenguaje de estilos que se utiliza para describir la presentación de un documento HTML. Permite controlar el diseño, colores, fuentes y otros aspectos visuales de una página web.</p>
+
+    <h2>Estructura Básica de CSS</h2>
+    <div class="ejemplo-selector">
+        <code>selector { 
+    propiedad: valor; 
+}</code>
+    </div>
+
+    <h2>Componentes de CSS</h2>
+    <ol>
+        <li><strong>Selectores:</strong> Identifican los elementos HTML a los que se aplicará el estilo</li>
+        <li><strong>Propiedades:</strong> Características que se pueden modificar</li>
+        <li><strong>Valores:</strong> Configuraciones específicas para cada propiedad</li>
+    </ol>
+
+    <h2>Tipos de Selectores</h2>
+    <table>
+        <tr>
+            <th>Tipo de Selector</th>
+            <th>Sintaxis</th>
+            <th>Ejemplo</th>
+        </tr>
+        <tr>
+            <td>Selector de Tipo</td>
+            <td><code>nombre_etiqueta { }</code></td>
+            <td><code>p { color: blue; }</code> (aplica a todos los párrafos)</td>
+        </tr>
+        <tr>
+            <td>Selector de Clase</td>
+            <td><code>.nombre-clase { }</code></td>
+            <td><code>.texto-importante { font-weight: bold; }</code></td>
+        </tr>
+        <tr>
+            <td>Selector de ID</td>
+            <td><code>#nombre-id { }</code></td>
+            <td><code>#encabezado { background-color: gray; }</code></td>
+        </tr>
+    </table>
+
+    <h2>Diferencias entre Selectores</h2>
+    <ul>
+        <li><strong>Selector de Tipo:</strong> Afecta a todas las etiquetas del mismo nombre</li>
+        <li><strong>Selector de Clase:</strong> 
+            <ul>
+                <li>Puede aplicarse a múltiples elementos</li>
+                <li>Se usa con un punto (.) antes del nombre</li>
+                <li>Un elemento puede tener múltiples clases</li>
+            </ul>
+        </li>
+        <li><strong>Selector de ID:</strong>
+            <ul>
+                <li>Debe ser único en toda la página</li>
+                <li>Se usa con un # antes del nombre</li>
+                <li>Solo se puede aplicar a un elemento</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Propiedades Comunes Utilizadas</h2>
+    <ul>
+        <li><code>color</code>: Color del texto</li>
+        <li><code>background-color</code>: Color de fondo</li>
+        <li><code>font-family</code>: Tipo de letra</li>
+        <li><code>font-size</code>: Tamaño de letra</li>
+        <li><code>margin</code>: Espacio exterior</li>
+        <li><code>padding</code>: Espacio interior</li>
+        <li><code>border</code>: Bordes de los elementos</li>
+    </ul>
+</body>
+</html>

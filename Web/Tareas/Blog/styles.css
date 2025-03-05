@@ -1,14 +1,101 @@
-h1, h2, h3{
-    font-family: Arial, sans-serif;
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+body{
+    margin:0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
-h1{
+header{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    border-bottom: 4px solid white;
+    background-color: rgb(0, 25, 46)
+}
+h1{
+    color: white;
+    margin: 0;
+    font-weight: bold;
+    font-style: italic;
+}
+.contenido-junto{
+    display: flex;
+    flex-grow: 1;
 }
 
-#descripcion{
-    color: #fa522e;
+#sidebar{
+    height: 100vh;
+    width: 300px;
+    background-color: #FFE600;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#Links{
+    margin-bottom: 20px;  
+}
+
+#Links h3{
+    color: black;
+    margin-bottom: 20px;
+}
+
+#Links ul {
+    list-style: none;
+}
+
+#Links ul li{
+    margin-bottom: 10px;
+}
+
+#Links ul li a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    background-color: rgb(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+
+#descripccion {
+    background-image: url(https://files.oaiusercontent.com/file-AdDQGWKAuUtFxY9E9adoJL?se=2025-03-05T14%3A57%3A01Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Da4846b8e-8eab-4cb4-979c-8d2e238acb1a.webp&sig=ciaOpOrsK4aRi0qSt6%2B52o7bhCxnhmFlC2//bEurUso%3D);
+    flex-grow:1;
     background-color: #130808;
+    color: #fa522e;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-size:cover;
+    background-position: center;
+
+}
+
+#descripccion h2{
+    margin-bottom: 15px;
+    color: white;
+}
+
+#descripccion p{
+    margin-bottom: 15px;
+    color: black;
+
+    text-align: column;
+}
+
+footer{
+    background-color: rgb(0, 25, 46);
+    color: white;
+    text-align: center;
+    padding: 10px;
+
 }

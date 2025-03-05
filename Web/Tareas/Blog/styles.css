@@ -27,6 +27,7 @@ h1{
 .contenido-junto{
     display: flex;
     flex-grow: 1;
+    flex-direction: row;
 }
 
 #sidebar{
@@ -99,3 +100,4 @@ footer{
     padding: 10px;
 
 }
+

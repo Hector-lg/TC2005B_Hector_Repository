@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakout</title>
+    <script src="game_classes.js"></script>
+    <script src="BreackoutClases.js"></script>
+    <link rel="stylesheet" href="BreackStyles.css"/>
+</head>
+<body>
+    <div id="menu"> 
+        <label for="rows">Filas: </label>
+        <input type="number" id="rows" min="1" max="10" value="6">
+        <br>
+        <label for="columns">Columnas: </label>
+        <input type="number" id="columns" min="1" max="15" value="13">
+        <br>
+        <label for="level">Nivel: </label>
+        <input type="number" id="level" min="1" max="5" value="1">
+        <br/>
+        <button id="start">Comenzar</button>
+    </div>
+    <canvas id="canvas"> 
+    </canvas>
+    <img hidden id="sprite" src="52-Breakout-Tiles.png" alt="Sprite Breakout"/>
+    <img hidden id="bricks" src="BreackOut_SpriteSheet.png" alt="Sprite Bricks"/>
+
+    <script>
+        document.getElementById("start").addEventListener("click", () => {
+            const rows = parseInt(document.getElementById("rows").value);
+            const columns = parseInt(document.getElementById("columns").value);
+            const level = parseInt(document.getElementById("level").value) || 1;
+
+            // Ocultar el menú y mostrar el canvas
+            document.getElementById("menu").style.display = "none";
+            document.getElementById("canvas").style.display = "block";
+
+            // Iniciar el juego con los valores seleccionados
+            const game = new Breakout("#canvas", rows, columns, level);
+        });
+    </script>
+</body>
+</html>

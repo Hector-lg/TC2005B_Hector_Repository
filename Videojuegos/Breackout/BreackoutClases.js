@@ -26,7 +26,7 @@ class Ball extends GameObject{
 
 
     if(this.position.y + this.position.y < 0){
-        this.velocity.y = this.velocity.y;
+        this.velocity.y = -this.velocity.y;
     }
 
     //colision con la pala
@@ -36,7 +36,9 @@ class Ball extends GameObject{
         this.position.y + this.velocity.y + this.radius*2 > paddle.position.y){
             this.velocity.y =-this.velocity.y;
         }
-
+    else if (this.position.y+this.velocity.y > canvas.width){
+        this.velocity.y =-this.velocity.y;
+    }
     //detectar si la pelota cayo
     else if(this.position.y + this.velocity.y > canvas.height - this.radius*2){
         console.log("game over");

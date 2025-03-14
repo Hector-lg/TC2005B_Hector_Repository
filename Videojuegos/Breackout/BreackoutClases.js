@@ -304,7 +304,7 @@ class Breakout{
         }
     }
 
-    updateUI() {
+    updateUI() { // no se porque las vidas no cuentan :(
         this.livesElement.textContent = "vidas:"+ this.lives;
         this.scoreElement.textContent = "puntiacion: "+ this.score;
       }

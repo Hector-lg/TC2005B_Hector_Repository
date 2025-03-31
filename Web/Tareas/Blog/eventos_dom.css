@@ -1,0 +1,164 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+input[type="text"], select {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input[type="button"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: #45a049;
+}
+
+.respuesta {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.ejemplo {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 4px solid #4CAF50;
+}
+
+.referencia {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 10px;
+}
+
+pre {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+/* Estilos para la representación visual del DOM */
+.dom-visualization {
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.dom-node {
+    position: relative;
+    padding: 10px;
+    border: 2px solid #4CAF50;
+    margin: 20px 0 0 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: inline-block;
+    vertical-align: top;
+    min-width: 100px;
+}
+
+.dom-node span {
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.dom-node.root {
+    background-color: #e3f2fd;
+    border-color: #2196F3;
+}
+
+.dom-node.html {
+    background-color: #fff3e0;
+    border-color: #ff9800;
+}
+
+.dom-node.text {
+    background-color: #f1f8e9;
+    border-color: #8bc34a;
+    font-style: italic;
+    min-width: 80px;
+    font-size: 0.9em;
+}
+
+.dom-node.attr {
+    background-color: #ede7f6;
+    border-color: #673ab7;
+    font-size: 0.8em;
+    padding: 5px;
+    min-width: 60px;
+}
+
+.diagram-caption {
+    text-align: center;
+    font-style: italic;
+    margin-top: 20px;
+    color: #555;
+}
+
+/* Líneas conectoras */
+.dom-node::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    height: 20px;
+    width: 2px;
+    background-color: #4CAF50;
+}
+
+.dom-node.root::before {
+    display: none;
+}

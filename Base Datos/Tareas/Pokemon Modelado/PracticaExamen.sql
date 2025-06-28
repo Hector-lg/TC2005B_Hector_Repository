@@ -77,10 +77,34 @@ FROM film
 JOIN inventory USING(film_id)
 JOIN film_category USING(film_id)
 JOIN category USING(category_id)
-LEFT JOIN rental ON inventory.inventory_id = rental.inventory_id AND rental.rental_date >= NOW() - INTERVAL 30 DAY
+LEFT JOIN rental ON inventory.inventory_id = rental.inventory_id
 JOIN payment USING(rental_id)
-GROUP BY film.film_id, category.name
-HAVING COUNT(inventory.film_id) < 2;
+GROUP BY film.title, category.name HAVING count(inventory.film_id) < 2
+ORDER BY rental_id desc limit 30 ;
+
+SELECT 
+    film.title, 
+    COUNT(DISTINCT inventory.inventory_id) AS copies_available,
+    category.name AS category, 
+    COUNT(DISTINCT CASE 
+        WHEN rental.rental_date > DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY) 
+        THEN rental.rental_id 
+        END) AS rentals_last_30_days,
+    SUM(payment.amount) / film.replacement_cost AS profitability
+FROM 
+    film
+    JOIN inventory USING(film_id)
+    JOIN film_category USING(film_id)
+    JOIN category USING(category_id)
+    LEFT JOIN rental ON inventory.inventory_id = rental.inventory_id
+    LEFT JOIN payment ON rental.rental_id = payment.rental_id
+GROUP BY 
+    film.film_id, film.title, category.name, film.replacement_cost
+HAVING 
+    COUNT(DISTINCT inventory.inventory_id) < 2
+ORDER BY 
+    rentals_last_30_days DESC, profitability DESC
+LIMIT 30;
 
 SELECT CONCAT(first_name, " ", last_name) as Customer_name, customer_id, SUM(amount) AS total_gastado
 FROM payment
@@ -97,7 +121,8 @@ SELECT
 FROM film_category fc
 JOIN film as f using(film_id)
 JOIN category as c using(category_id)
-GROUP BY c.name;
+GROUP BY c.name
+order by duracion_promedio desc;
 
 
 -- calcular el pago totla por cliente
@@ -143,3 +168,95 @@ FROM sakila.actor
 GROUP BY last_name
 HAVING count(*) = 1
 );
+
+-- Ejemplo: Encontrar clientes que han alquilado películas de acción
+SELECT customer_id, first_name, last_name
+FROM customer
+WHERE customer_id IN (
+    SELECT DISTINCT r.customer_id
+    FROM rental r
+    JOIN inventory i ON r.inventory_id = i.inventory_id
+    JOIN film f ON i.film_id = f.film_id
+    JOIN film_category fc ON f.film_id = fc.film_id
+    JOIN category c ON fc.category_id = c.category_id
+    WHERE c.name = 'Action'
+)
+order by customer_id;
+
+
+-- Ejemplo: Mostrar películas con su número de alquileres
+SELECT 
+    f.film_id,
+    f.title,
+    (SELECT COUNT(*) FROM rental r 
+     JOIN inventory i ON r.inventory_id = i.inventory_id 
+     WHERE i.film_id = f.film_id) AS total_rentals
+FROM film f
+ORDER BY total_rentals DESC;
+
+
+-- Ejemplo: Top clientes por gastos y número de alquileres
+SELECT r.customer_ranking, r.customer_id, r.revenue, 
+       COUNT(rental.rental_id) AS rental_count
+FROM (
+    SELECT 
+        customer_id, 
+        SUM(amount) AS revenue,
+        RANK() OVER (ORDER BY SUM(amount) DESC) AS customer_ranking
+    FROM payment
+    GROUP BY customer_id
+) r
+JOIN rental ON r.customer_id = rental.customer_id
+WHERE r.customer_ranking <= 10
+GROUP BY r.customer_ranking, r.customer_id, r.revenue
+ORDER BY r.customer_ranking;
+
+DELIMITER //
+CREATE TRIGGER validate_rental_rate
+BEFORE INSERT ON film
+FOR EACH ROW
+BEGIN
+    -- Validar rango de precio
+    IF NEW.rental_rate < 0.99 OR NEW.rental_rate > 6.99 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El precio de alquiler debe estar entre 0.99 y 6.99';
+    END IF;
+    
+    -- Validar precio según clasificación
+    IF NEW.rating = 'G' AND NEW.rental_rate > 3.99 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Las películas infantiles (G) no deben tener precio superior a 3.99';
+    END IF;
+END//
+DELIMITER ;
+
+SHOW COLUMNs from film;
+INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features)
+VALUES ("La guerra de los mundos", "Un viaje a marte", 2023, 1, 7, 5.99, 120, 19.99, "PG-13", "Deleted Scenes"),
+        ("El viaje de Chihiro", "Un viaje a la luna", 2023, 1, 7, 2.99, 120, 19.99, "PG-13", "Deleted Scenes"),
+        ("El viaje de los sueños 1", "Un viaje a la luna", 2023, 1, 7, 2.99, 120, 19.99, "PG-13", "Deleted Scenes"),
+        ("El viaje de los sueños 2", "Un viaje a la luna", 2023, 1, 7, 2.99, 120, 19.99, "PG-13", "Deleted Scenes"),
+        ("El viaje de los sueños 3", "Un viaje a la luna", 2023, 1, 7, 2.99, 120, 19.99, "PG-13", "Deleted Scenes"),
+        ("El viaje de los sueños 4", "Un viaje a la luna", 2023, 1, 7, 2.99, 120, 19.99, "PG-13", "Deleted Scenes"),
+        ("El viaje de los sueños 5", "Un viaje a la luna", 2023, 1, 7, 2.99, 120, 19.99, "PG-13", "Deleted Scenes"),
+        ("El viaje de los sueños 6", "Un viaje a la luna", 2023, 1, 7, 2.99, 120, 19.99, "PG-13", "Deleted Scenes"),
+        ("El viaje de los sueños 7", "Un viaje a la luna", 2023, 1, 7, 2.99, 120, 19.99, "PG-13", "Deleted Scenes"),
+        ("El viaje de los sueños 8", "Un viaje a la luna", 2023, 1, 7, 2.99, 120, 19.99, "PG-13", "Deleted Scenes");
+
+
+-- Last Update Timestamp: Create a trigger that automatically 
+-- updates the last_update column to the current timestamp 
+--whenever a record is updated in the customer table.
+
+DELIMITER //
+CREATE TRIGGER update_lastUpdate 
+BEFORE UPDATE ON customer
+FOR EACH ROW
+BEGIN
+    SET NEW.last_update = NOW();
+END//
+DELIMITER ;
+
+
+
+
